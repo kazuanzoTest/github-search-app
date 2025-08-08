@@ -1,46 +1,127 @@
-# Getting Started with Create React App
+# GitHub Repository Search App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+GitHubのリポジトリを検索・閲覧できるReactアプリケーションです。
 
-## Available Scripts
+## 🚀 機能
 
-In the project directory, you can run:
+- **GitHub Search API**を使用したリポジトリ検索
+- **表示件数選択**（10件、30件、50件、100件）
+- **ソート機能**（スター数、フォーク数、更新日時）
+- **ページネーション**機能
+- **レスポンシブデザイン**
+- **検索結果のスクロール表示**（ページネーション部分は固定）
+- **エラーハンドリング**とローディング状態表示
+
+## 🛠 技術スタック
+
+- **React** 19.1.1
+- **TypeScript** 4.9.5
+- **Axios** - HTTP通信
+- **GitHub Search API**
+- **GitHub Pages** - デプロイ
+
+## 🎯 デモ
+
+**公開URL**: https://kazuanzotest.github.io/github-search-app/
+
+## 📦 インストール・実行
+
+### 前提条件
+- Node.js (推奨: 14以上)
+- npm または yarn
+
+### セットアップ
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/kazuanzoTest/github-search-app.git
+
+# ディレクトリに移動
+cd github-search-app
+
+# 依存関係をインストール
+npm install
+
+# 開発サーバーを起動
+npm start
+```
+
+開発サーバーが起動すると、[http://localhost:3000](http://localhost:3000) でアプリにアクセスできます。
+
+### 他のポートで起動する場合
+
+```bash
+# PowerShellの場合
+$env:PORT=3001
+npm start
+
+# コマンドプロンプトの場合
+set PORT=3001
+npm start
+```
+
+## 🎮 使い方
+
+1. **検索**: 検索ボックスにキーワードを入力（例：「react」「vue」「typescript」）
+2. **ソート設定**: スター数・フォーク数・更新日時から選択
+3. **表示件数**: 10件〜100件から選択
+4. **ページ移動**: ページネーションボタンで結果を閲覧
+
+## 📝 利用可能なスクリプト
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+開発モードでアプリを起動します。  
+[http://localhost:3000](http://localhost:3000) でブラウザに表示されます。
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+テストランナーを対話モードで起動します。
 
 ### `npm run build`
+プロダクション用にアプリをビルドし、`build`フォルダに出力します。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npm run deploy`
+GitHub Pagesにアプリをデプロイします。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📁 プロジェクト構造
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+src/
+├── components/          # Reactコンポーネント
+│   ├── SearchForm.tsx   # 検索フォーム
+│   ├── RepositoryList.tsx # リポジトリ一覧
+│   ├── Pagination.tsx   # ページネーション
+│   └── ErrorMessage.tsx # エラー表示
+├── api/
+│   └── github.ts        # GitHub API通信
+├── types/
+│   └── github.ts        # TypeScript型定義
+├── App.tsx              # メインアプリ
+├── App.css              # スタイル
+└── index.tsx            # エントリーポイント
+```
 
-### `npm run eject`
+## 🎨 主な特徴
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### ユーザビリティ
+- 日本語対応UI
+- 視覚的に分かりやすいアイコン（⭐ Stars、🍴 Forks）
+- ローディング・エラー状態の適切な表示
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### パフォーマンス
+- ページネーション固定でスムーズなスクロール
+- Axios によるタイムアウト設定（10秒）
+- 適切なエラーハンドリング
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### レスポンシブデザイン
+- モバイル・タブレット・デスクトップ対応
+- フレキシブルなレイアウト
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 🔧 API制限事項
 
-## Learn More
+- GitHub APIは未認証の場合、1時間あたり60リクエストまで
+- 検索結果は最大1000件まで
+- 1リクエストあたり最大100件まで取得可能
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📄 ライセンス
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+このプロジェクトは学習・評価目的で作成されています。
