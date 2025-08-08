@@ -7,7 +7,7 @@ import RepositoryList from './components/RepositoryList';
 import Pagination from './components/Pagination';
 import ErrorMessage from './components/ErrorMessage';
 
-const ITEMS_PER_PAGE = 30;
+// デフォルト表示件数は各コンポーネントで管理
 
 function App() {
   const [state, setState] = useState<SearchState>({
@@ -24,6 +24,7 @@ function App() {
     query: string, 
     sort: string = 'stars', 
     order: string = 'desc',
+    perPage: number = 30,
     page: number = 1
   ) => {
     setState(prev => ({
@@ -40,13 +41,13 @@ function App() {
         query,
         sort: sort as 'stars' | 'forks' | 'updated',
         order: order as 'asc' | 'desc',
-        per_page: ITEMS_PER_PAGE,
+        per_page: perPage,
         page,
       });
 
       const totalPages = Math.min(
-        Math.ceil(response.total_count / ITEMS_PER_PAGE),
-        34 // GitHub APIは最大1000件（34ページ）までしか返さない
+        Math.ceil(response.total_count / perPage),
+        Math.floor(1000 / perPage) // GitHub APIは最大1000件まで
       );
 
       setState(prev => ({
@@ -78,8 +79,8 @@ function App() {
   const handlePageChange = useCallback((page: number) => {
     if (!state.query || state.loading) return;
     
-    // URLパラメータから現在のソート設定を保持するか、デフォルト値を使用
-    handleSearch(state.query, 'stars', 'desc', page);
+    // 現在の表示件数を保持してページ変更
+    handleSearch(state.query, 'stars', 'desc', 30, page);
     
     // ページ変更時に画面最上部にスクロール
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -87,7 +88,7 @@ function App() {
 
   const handleRetry = useCallback(() => {
     if (state.query) {
-      handleSearch(state.query, 'stars', 'desc', state.currentPage);
+      handleSearch(state.query, 'stars', 'desc', 30, state.currentPage);
     }
   }, [state.query, state.currentPage, handleSearch]);
 
@@ -95,11 +96,10 @@ function App() {
     <div className="App">
       <header className="header">
         <h1>GitHub Repository Search</h1>
-        <p>GitHubのリポジトリを検索・発見しよう</p>
       </header>
 
       <SearchForm
-        onSearch={(query, sort, order) => handleSearch(query, sort, order, 1)}
+        onSearch={(query, sort, order, perPage) => handleSearch(query, sort, order, perPage, 1)}
         loading={state.loading}
       />
 
@@ -111,7 +111,7 @@ function App() {
       )}
 
       {!state.error && (
-        <>
+        <div className="results-container">
           <RepositoryList
             repositories={state.repositories}
             loading={state.loading}
@@ -126,7 +126,7 @@ function App() {
               loading={state.loading}
             />
           )}
-        </>
+        </div>
       )}
     </div>
   );

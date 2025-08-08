@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface SearchFormProps {
-  onSearch: (query: string, sort: string, order: string) => void;
+  onSearch: (query: string, sort: string, order: string, perPage: number) => void;
   loading: boolean;
 }
 
@@ -9,11 +9,12 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, loading }) => {
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState('stars');
   const [order, setOrder] = useState('desc');
+  const [perPage, setPerPage] = useState(30);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      onSearch(query.trim(), sort, order);
+      onSearch(query.trim(), sort, order, perPage);
     }
   };
 
@@ -65,6 +66,22 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, loading }) => {
           >
             <option value="desc">降順</option>
             <option value="asc">昇順</option>
+          </select>
+        </div>
+        
+        <div className="option-group">
+          <label htmlFor="perPage">表示件数:</label>
+          <select
+            id="perPage"
+            value={perPage}
+            onChange={(e) => setPerPage(Number(e.target.value))}
+            className="select"
+            disabled={loading}
+          >
+            <option value={10}>10件</option>
+            <option value={30}>30件</option>
+            <option value={50}>50件</option>
+            <option value={100}>100件</option>
           </select>
         </div>
       </div>
