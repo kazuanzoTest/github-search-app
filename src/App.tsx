@@ -113,22 +113,26 @@ function App() {
       )}
 
       {!state.error && (
-        <div className="results-container">
-          <RepositoryList
-            repositories={state.repositories}
-            loading={state.loading}
-          />
-
-          {state.repositories.length > 0 && !state.loading && (
-            <Pagination
-              currentPage={state.currentPage}
-              totalPages={state.totalPages}
-              totalCount={state.totalCount}
-              onPageChange={handlePageChange}
+        <>
+          <div className="results-container">
+            <RepositoryList
+              repositories={state.repositories}
               loading={state.loading}
             />
+          </div>
+
+          {state.repositories.length > 0 && !state.loading && (
+            <div className="pagination-fixed">
+              <Pagination
+                currentPage={state.currentPage}
+                totalPages={state.totalPages}
+                totalCount={state.totalCount}
+                onPageChange={handlePageChange}
+                loading={state.loading}
+              />
+            </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );
