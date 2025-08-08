@@ -11,7 +11,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repositories, loading }
     return (
       <div className="loading">
         <div className="loading-spinner"></div>
-        <p>Searching repositories...</p>
+        <p>リポジトリを検索中...</p>
       </div>
     );
   }
@@ -19,7 +19,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repositories, loading }
   if (repositories.length === 0) {
     return (
       <div className="empty-state">
-        <p>No repositories found. Try searching for something else.</p>
+        <p>リポジトリが見つかりませんでした。別の検索キーワードをお試しください。</p>
       </div>
     );
   }
@@ -41,7 +41,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repositories, loading }
                 </a>
               </h3>
               <p className="repository-description">
-                {repo.description || 'No description available'}
+                {repo.description || '説明がありません'}
               </p>
             </div>
             <div className="repository-owner">
@@ -71,7 +71,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repositories, loading }
               )}
             </div>
             <div className="repository-updated">
-              Updated {new Date(repo.updated_at).toLocaleDateString()}
+              更新日: {new Date(repo.updated_at).toLocaleDateString('ja-JP')}
             </div>
           </div>
           
@@ -83,7 +83,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repositories, loading }
                 </span>
               ))}
               {repo.topics.length > 5 && (
-                <span className="topic-more">+{repo.topics.length - 5} more</span>
+                <span className="topic-more">他 +{repo.topics.length - 5}</span>
               )}
             </div>
           )}

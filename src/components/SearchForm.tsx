@@ -24,7 +24,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, loading }) => {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search repositories..."
+          placeholder="リポジトリを検索..."
           className="search-input"
           disabled={loading}
           required
@@ -34,13 +34,13 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, loading }) => {
           className="search-button"
           disabled={loading || !query.trim()}
         >
-          {loading ? 'Searching...' : 'Search'}
+          {loading ? '検索中...' : '検索'}
         </button>
       </div>
       
       <div className="search-options">
         <div className="option-group">
-          <label htmlFor="sort">Sort by:</label>
+          <label htmlFor="sort">並び順:</label>
           <select
             id="sort"
             value={sort}
@@ -48,14 +48,14 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, loading }) => {
             className="select"
             disabled={loading}
           >
-            <option value="stars">Stars</option>
-            <option value="forks">Forks</option>
-            <option value="updated">Updated</option>
+            <option value="stars">スター数</option>
+            <option value="forks">フォーク数</option>
+            <option value="updated">更新日時</option>
           </select>
         </div>
         
         <div className="option-group">
-          <label htmlFor="order">Order:</label>
+          <label htmlFor="order">順序:</label>
           <select
             id="order"
             value={order}
@@ -63,8 +63,8 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, loading }) => {
             className="select"
             disabled={loading}
           >
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
+            <option value="desc">降順</option>
+            <option value="asc">昇順</option>
           </select>
         </div>
       </div>

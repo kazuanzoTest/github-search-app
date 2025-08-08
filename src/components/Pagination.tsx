@@ -61,8 +61,8 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <div className="pagination">
       <div className="pagination-info">
-        <span>Total: {totalCount.toLocaleString()} repositories</span>
-        <span>Page {currentPage} of {totalPages}</span>
+        <span>合計: {totalCount.toLocaleString()} リポジトリ</span>
+        <span>{totalPages} ページ中 {currentPage} ページ</span>
       </div>
       
       <div className="pagination-controls">
@@ -71,7 +71,7 @@ const Pagination: React.FC<PaginationProps> = ({
           disabled={currentPage <= 1 || loading}
           className="pagination-button"
         >
-          ← Previous
+          ← 前へ
         </button>
         
         <div className="pagination-numbers">
@@ -99,7 +99,7 @@ const Pagination: React.FC<PaginationProps> = ({
           disabled={currentPage >= totalPages || loading}
           className="pagination-button"
         >
-          Next →
+          次へ →
         </button>
       </div>
     </div>

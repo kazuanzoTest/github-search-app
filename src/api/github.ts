@@ -45,19 +45,19 @@ export const searchRepositories = async (params: SearchParams): Promise<SearchRe
       const axiosError = error as AxiosError;
       
       if (axiosError.response?.status === 403) {
-        throw new GitHubApiError('API rate limit exceeded. Please try again later.', 403);
+        throw new GitHubApiError('API利用制限に達しました。しばらく待ってから再試行してください。', 403);
       }
       if (axiosError.response?.status === 422) {
-        throw new GitHubApiError('Invalid search query. Please check your search terms.', 422);
+        throw new GitHubApiError('検索クエリが無効です。検索キーワードを確認してください。', 422);
       }
       if (axiosError.response?.status) {
-        throw new GitHubApiError(`HTTP error! status: ${axiosError.response.status}`, axiosError.response.status);
+        throw new GitHubApiError(`HTTPエラーが発生しました。ステータス: ${axiosError.response.status}`, axiosError.response.status);
       }
       if (axiosError.code === 'ECONNABORTED') {
-        throw new GitHubApiError('Request timeout. Please try again.', 408);
+        throw new GitHubApiError('リクエストがタイムアウトしました。再試行してください。', 408);
       }
     }
     
-    throw new GitHubApiError('Network error occurred. Please check your connection.', 0);
+    throw new GitHubApiError('ネットワークエラーが発生しました。インターネット接続を確認してください。', 0);
   }
 };

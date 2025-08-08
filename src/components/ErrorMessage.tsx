@@ -10,11 +10,11 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ error, onRetry }) => {
     <div className="error-message">
       <div className="error-icon">⚠️</div>
       <div className="error-content">
-        <h3>Something went wrong</h3>
+        <h3>エラーが発生しました</h3>
         <p>{error}</p>
         {onRetry && (
           <button onClick={onRetry} className="retry-button">
-            Try Again
+            再試行
           </button>
         )}
       </div>
