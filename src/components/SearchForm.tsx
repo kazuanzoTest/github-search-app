@@ -48,8 +48,8 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, loading }) => {
             className="select"
             disabled={loading}
           >
-            <option value="stars">スター数</option>
-            <option value="forks">フォーク数</option>
+            <option value="stars">⭐ Stars</option>
+            <option value="forks">🍴 Forks</option>
             <option value="updated">更新日時</option>
           </select>
         </div>

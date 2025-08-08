@@ -94,7 +94,7 @@ function App() {
   return (
     <div className="App">
       <header className="header">
-        <h1>GitHub リポジトリ検索</h1>
+        <h1>GitHub Repository Search</h1>
         <p>GitHubのリポジトリを検索・発見しよう</p>
       </header>
 
