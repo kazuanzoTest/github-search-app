@@ -41,4 +41,5 @@ export interface SearchState {
   loading: boolean;
   error: string | null;
   query: string;
+  perPage: number;
 }

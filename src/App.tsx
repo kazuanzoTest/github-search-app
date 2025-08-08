@@ -18,6 +18,7 @@ function App() {
     loading: false,
     error: null,
     query: '',
+    perPage: 30,
   });
 
   const handleSearch = useCallback(async (
@@ -34,6 +35,7 @@ function App() {
       ...(page === 1 && { repositories: [] }),
       query,
       currentPage: page,
+      perPage,
     }));
 
     try {
@@ -80,17 +82,17 @@ function App() {
     if (!state.query || state.loading) return;
     
     // 現在の表示件数を保持してページ変更
-    handleSearch(state.query, 'stars', 'desc', 30, page);
+    handleSearch(state.query, 'stars', 'desc', state.perPage, page);
     
     // ページ変更時に画面最上部にスクロール
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [state.query, state.loading, handleSearch]);
+  }, [state.query, state.loading, state.perPage, handleSearch]);
 
   const handleRetry = useCallback(() => {
     if (state.query) {
-      handleSearch(state.query, 'stars', 'desc', 30, state.currentPage);
+      handleSearch(state.query, 'stars', 'desc', state.perPage, state.currentPage);
     }
-  }, [state.query, state.currentPage, handleSearch]);
+  }, [state.query, state.currentPage, state.perPage, handleSearch]);
 
   return (
     <div className="App">
